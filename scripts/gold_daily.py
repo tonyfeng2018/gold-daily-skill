@@ -21,13 +21,13 @@ SENT_FILE = os.path.expanduser(
 DEDUP_HOURS = 48  # 去重窗口（小时）
 
 # Telegram 配置（直接调 Bot API，不经过 agent）
-TELEGRAM_BOT_TOKEN = "8712545638:AAGjQGZ8QD1XN8xVEE19dHJex_DYsGTEFpM"
-TELEGRAM_CHAT_ID   = "7796298136"
+TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+TELEGRAM_CHAT_ID   = "YOUR_TELEGRAM_CHAT_ID"
 
 # AgentMail 邮件配置
-AGENTMAIL_API_KEY = "am_us_30c1c67833ee414b2694fa640dd43fa61ee736e0497f5c83028bd79320578e8e"
-AGENTMAIL_INBOX   = "gater-gold@agentmail.to"
-EMAIL_TO          = "tongfweb3@gmail.com"
+AGENTMAIL_API_KEY = "YOUR_AGENTMAIL_API_KEY"
+AGENTMAIL_INBOX   = "YOUR_INBOX@agentmail.to"
+EMAIL_TO          = "YOUR_EMAIL@gmail.com"
 
 # ── 工具函数 ──────────────────────────────────────────
 

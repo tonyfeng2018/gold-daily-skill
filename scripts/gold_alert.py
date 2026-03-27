@@ -13,8 +13,8 @@ ALERT_PCT   = 1.5          # 触发阈值（%）
 STATE_FILE  = os.path.expanduser("~/.openclaw/workspace/memory/gold-alert-state.json")
 DAILY_SCRIPT = os.path.expanduser("~/.openclaw/workspace/scripts/gold_daily.py")
 
-TELEGRAM_BOT_TOKEN = "8712545638:AAGjQGZ8QD1XN8xVEE19dHJex_DYsGTEFpM"
-TELEGRAM_CHAT_ID   = "7796298136"
+TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+TELEGRAM_CHAT_ID   = "YOUR_TELEGRAM_CHAT_ID"
 
 
 def get_price():
