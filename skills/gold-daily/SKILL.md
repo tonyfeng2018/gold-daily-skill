@@ -5,7 +5,7 @@ description: >
   黄金市场情报官 — 每日自动推送黄金资讯日报（Telegram + 邮件双渠道）。
   含实时金价、三级重要性分类资讯（🔴高/🟡中/🟢一般）、情报官多空观点、
   一句话摘要、金价突变1.5%自动预警。
-author: Gater (tonyfeng2018)
+author: tonyfeng2018
 ---
 
 # Gold Daily Skill — 黄金资讯日报
