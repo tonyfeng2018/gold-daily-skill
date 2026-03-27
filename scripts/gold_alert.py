@@ -10,8 +10,8 @@ import urllib.request, json, time, os, sys
 from datetime import datetime, timezone, timedelta
 
 ALERT_PCT   = 1.5          # 触发阈值（%）
-STATE_FILE  = os.path.expanduser("~/.openclaw/workspace/memory/gold-alert-state.json")
-DAILY_SCRIPT = os.path.expanduser("~/.openclaw/workspace/scripts/gold_daily.py")
+STATE_FILE  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "memory", "gold-alert-state.json")
+DAILY_SCRIPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gold_daily.py")
 
 TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
 TELEGRAM_CHAT_ID   = "YOUR_TELEGRAM_CHAT_ID"

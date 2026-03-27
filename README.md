@@ -14,7 +14,7 @@
 | 🧠 情报官观点 | 基于新闻自动推断多空方向 + 技术关键价位 |
 | ⚡ 突变预警 | 金价1小时内波动 ≥1.5% 立即触发完整日报 |
 | 🚫 48h 去重 | 推送过的资讯不重复发送 |
-| 📧 双渠道 | Telegram + 邮件同步发送 |
+| 📧 双渠道 | Telegram + 邮件同步发送（邮件可选） |
 | ⏰ 定时推送 | 每天 08:00 / 20:00 北京时间自动发送 |
 
 ---
@@ -66,12 +66,17 @@ gold-daily-skill/
 ├── scripts/
 │   ├── gold_daily.py                # 日报主脚本（抓取+分析+推送）
 │   └── gold_alert.py                # 价格突变预警脚本（每5分钟运行）
+├── memory/                          # 运行时自动创建，无需手动操作
+│   ├── gold-sent-news.json          # 48h 去重记录（首次运行自动生成）
+│   └── gold-alert-state.json        # 预警状态：参考价+上次报警时间（自动生成）
 └── skills/
     └── gold-daily/
         ├── SKILL.md                 # Skill 完整文档
         └── references/
             └── config.md            # 配置说明
 ```
+
+> **注意：** `memory/` 目录下的文件由脚本自动创建，首次运行前无需手动创建。
 
 ---
 
@@ -82,20 +87,45 @@ gold-daily-skill/
 编辑 `scripts/gold_daily.py` 和 `scripts/gold_alert.py`，替换以下占位符：
 
 ```python
-# Telegram
+# Telegram（必填）
 TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"   # @BotFather 获取
 TELEGRAM_CHAT_ID   = "YOUR_TELEGRAM_CHAT_ID"      # 你的 Telegram 用户 ID
 
-# AgentMail（邮件，可选）
+# AgentMail 邮件（可选，不需要邮件推送可跳过）
 AGENTMAIL_API_KEY  = "YOUR_AGENTMAIL_API_KEY"      # console.agentmail.to 获取
 AGENTMAIL_INBOX    = "YOUR_INBOX@agentmail.to"     # 创建后填入
 EMAIL_TO           = "YOUR_EMAIL@gmail.com"         # 收件邮箱
 ```
 
-> 如何获取 Telegram Chat ID：向你的机器人发一条消息，然后访问
+> **只用 Telegram 不需要邮件？** 在 `gold_daily.py` 的 `main()` 函数中注释掉 `send_email(report, bj_now)` 这行即可。
+
+> **如何获取 Telegram Chat ID：** 向你的机器人发一条消息，然后访问
 > `https://api.telegram.org/bot<TOKEN>/getUpdates`，找 `chat.id` 字段。
 
-### 2. 设置定时任务（OpenClaw Cron）
+### 2. 创建 memory 目录
+
+```bash
+mkdir -p memory
+echo '{"sent":[]}' > memory/gold-sent-news.json
+echo '{}' > memory/gold-alert-state.json
+```
+
+### 3. 测试运行
+
+```bash
+python3 scripts/gold_daily.py
+```
+
+正常输出应包含：
+```
+[gold_daily] Price: 4411.38
+[gold_daily] Fetched 15 items before dedup
+[gold_daily] New items after dedup: 10
+[gold_daily] Telegram sent: message_id=xxx
+[gold_daily] Email sent: <xxx@email.amazonses.com>
+```
+
+### 4. 设置定时任务（OpenClaw Cron）
 
 **早报（每天 08:00 北京时间）：**
 ```json
@@ -127,7 +157,7 @@ EMAIL_TO           = "YOUR_EMAIL@gmail.com"         # 收件邮箱
 }
 ```
 
-### 3. 运行依赖
+### 5. 运行依赖
 
 - Python 3.8+
 - 仅使用标准库（`urllib`、`json`、`re`），**无需额外安装任何包**

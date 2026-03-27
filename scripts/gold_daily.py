@@ -15,9 +15,7 @@ from datetime import datetime, timezone, timedelta
 from html.parser import HTMLParser
 
 # ── 配置 ──────────────────────────────────────────────
-SENT_FILE = os.path.expanduser(
-    "~/.openclaw/workspace/memory/gold-sent-news.json"
-)
+SENT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "memory", "gold-sent-news.json")
 DEDUP_HOURS = 48  # 去重窗口（小时）
 
 # Telegram 配置（直接调 Bot API，不经过 agent）
