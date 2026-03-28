@@ -1,0 +1,34 @@
+# 敏感配置和凭据
+memory/
+config/
+.openclaw/
+*.json
+!skills/gold-daily/references/config.md
+
+# 个人文件
+SOUL.md
+USER.md
+AGENTS.md
+TOOLS.md
+IDENTITY.md
+HEARTBEAT.md
+BOOTSTRAP.md
+
+# 运行时文件
+node_modules/
+package-lock.json
+*.log
+
+# 临时文件
+*.xlsx
+*.png
+*.html
+README_gold_daily.md
+gen_listing.js
+package.json
+polymarket_cover.*
+
+# Python
+__pycache__/
+*.pyc
+.env
